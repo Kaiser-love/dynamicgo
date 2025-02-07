@@ -108,7 +108,7 @@ func GuardSlice(buf *[]byte, n int) {
 }
 
 func AddPtr(a unsafe.Pointer, b uintptr) unsafe.Pointer {
-	return unsafe.Pointer(uintptr(a) + b)
+	return unsafe.Add(a, b)
 }
 
 func SubPtr(a unsafe.Pointer, b uintptr) unsafe.Pointer {
@@ -132,9 +132,10 @@ func Growslice(et *GoType, old GoSlice, cap int) GoSlice {
 // output depends on the input. NoEscape is inlined and currently
 // compiles down to zero instructions.
 // USE CAREFULLY!
+//
 //go:nosplit
 //goland:noinspection GoVetUnsafePointer
 func NoEscape(p unsafe.Pointer) unsafe.Pointer {
-    x := uintptr(p)
-    return unsafe.Pointer(x ^ 0)
+	x := uintptr(p)
+	return unsafe.Pointer(x ^ 0)
 }
