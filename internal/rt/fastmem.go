@@ -108,16 +108,14 @@ func GuardSlice(buf *[]byte, n int) {
 }
 
 func AddPtr(a unsafe.Pointer, b uintptr) unsafe.Pointer {
-	//return unsafe.Pointer(uintptr(a) + b)
 	return unsafe.Add(a, b)
 }
 
 func SubPtr(a unsafe.Pointer, b uintptr) unsafe.Pointer {
-	//return unsafe.Pointer(uintptr(a) - b)
 	return unsafe.Add(a, -b)
 }
 
-func PtrOffset(a unsafe.Pointer, b unsafe.Pointer) int {
+func PtrOffset(a uintptr, b uintptr) int {
 	return int(uintptr(a)) - int(uintptr(b))
 }
 
